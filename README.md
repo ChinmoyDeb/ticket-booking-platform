@@ -1,10 +1,12 @@
-# 🎫 TicketHub — Ticket Booking Platform
+# TicketHub — Ticket Booking Platform
+
+**Live Deployment:** [https://ticket-booking-platform-edvrjim17-chinmoydeb2005-8933s-projects.vercel.app/](https://ticket-booking-platform-edvrjim17-chinmoydeb2005-8933s-projects.vercel.app/)
 
 A production-ready full-stack ticket booking platform for movies and concerts with real-time seat selection, hold TTL, distributed concurrency control, automated waitlist management, and QR code email tickets.
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Node.js 18+
@@ -18,7 +20,7 @@ A production-ready full-stack ticket booking platform for movies and concerts wi
 cd backend
 npm install
 cp .env.example .env
-# → Fill in your values (see Environment Variables section)
+# Fill in your values (see Environment Variables section)
 
 # Frontend
 cd ../frontend
@@ -64,7 +66,7 @@ npm run dev     # starts on http://localhost:5173
 
 ---
 
-## 🔑 Demo Credentials
+## Demo Credentials
 
 | Role | Email | Password |
 |------|-------|----------|
@@ -74,7 +76,7 @@ npm run dev     # starts on http://localhost:5173
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ticket-booking-platform/
@@ -141,7 +143,7 @@ ticket-booking-platform/
 
 ---
 
-## 🌍 Environment Variables
+## Environment Variables
 
 ### Backend (`backend/.env`)
 
@@ -179,7 +181,7 @@ ADMIN_PASSWORD=Admin@12345
 
 ---
 
-## 📡 API Documentation
+## API Documentation
 
 ### Base URL: `http://localhost:5000/api`
 
@@ -189,9 +191,9 @@ All authenticated endpoints require: `Authorization: Bearer <jwt_token>`
 | Method | Path | Auth | Description |
 |--------|------|------|-------------|
 | POST | `/auth/register` | — | Register (role: customer / organizer) |
-| POST | `/auth/login` | — | Login → returns JWT |
-| GET | `/auth/me` | ✓ | Get current user profile |
-| PUT | `/auth/me` | ✓ | Update profile |
+| POST | `/auth/login` | — | Login returns JWT |
+| GET | `/auth/me` | Yes | Get current user profile |
+| PUT | `/auth/me` | Yes | Update profile |
 | POST | `/auth/forgot-password` | — | Send reset email |
 | POST | `/auth/reset-password` | — | Reset password with token |
 
@@ -240,37 +242,37 @@ All authenticated endpoints require: `Authorization: Bearer <jwt_token>`
 
 ---
 
-## 🗄️ Database Schema
+## Database Schema
 
 ```
-users            → id, email, password_hash, role, first_name, last_name, phone
-venues           → id, name, city, address, description, total_seats
-seat_categories  → id, venue_id, category_name, base_price, quantity
-events           → id, organizer_id, venue_id, title, event_type, event_date, event_time, status
-event_pricing    → id, event_id, category_id, price
-seat_layout      → id, venue_id, event_id, row_number, seat_number, category_id, status
-seat_holds       → id, event_id, seat_id, customer_id, hold_expires_at
-bookings         → id, event_id, customer_id, booking_reference, total_amount, status
-booking_seats    → id, booking_id, seat_id, price
-waitlists        → id, event_id, customer_id, category_id, position, status, offer_token, offer_expires_at
-booking_history  → id, booking_id, action, details, created_by
+users            -> id, email, password_hash, role, first_name, last_name, phone
+venues           -> id, name, city, address, description, total_seats
+seat_categories  -> id, venue_id, category_name, base_price, quantity
+events           -> id, organizer_id, venue_id, title, event_type, event_date, event_time, status
+event_pricing    -> id, event_id, category_id, price
+seat_layout      -> id, venue_id, event_id, row_number, seat_number, category_id, status
+seat_holds       -> id, event_id, seat_id, customer_id, hold_expires_at
+bookings         -> id, event_id, customer_id, booking_reference, total_amount, status
+booking_seats    -> id, booking_id, seat_id, price
+waitlists        -> id, event_id, customer_id, category_id, position, status, offer_token, offer_expires_at
+booking_history  -> id, booking_id, action, details, created_by
 ```
 
 ---
 
-## ⚙️ System Design
+## System Design
 
 ### Seat Hold & TTL Mechanism
 
 When a customer selects seats, the system:
 
-1. **Acquires a Redis distributed lock** (`SET lock:{eventId}:{seatId} {uuid} NX EX 30`) — atomic, prevents two concurrent requests
-2. **Begins a PostgreSQL transaction** with `SELECT ... FOR UPDATE` row-level lock on the seat
-3. **Verifies** `status = 'available'` inside the lock
-4. **Updates** `seat_layout.status = 'held'`
-5. **Inserts** into `seat_holds` with `hold_expires_at = NOW() + 10 minutes`
-6. **Sets Redis key** `hold:{eventId}:{seatId}` with the same 10-minute TTL
-7. **Releases** the distributed lock
+1. Acquires a Redis distributed lock (`SET lock:{eventId}:{seatId} {uuid} NX EX 30`) — atomic, prevents two concurrent requests
+2. Begins a PostgreSQL transaction with `SELECT ... FOR UPDATE` row-level lock on the seat
+3. Verifies `status = 'available'` inside the lock
+4. Updates `seat_layout.status = 'held'`
+5. Inserts into `seat_holds` with `hold_expires_at = NOW() + 10 minutes`
+6. Sets Redis key `hold:{eventId}:{seatId}` with the same 10-minute TTL
+7. Releases the distributed lock
 
 A `node-cron` job runs every 60 seconds and:
 - Queries `seat_holds WHERE hold_expires_at < NOW()`
@@ -287,18 +289,18 @@ Two simultaneous requests for the same seat cannot both succeed because:
 
 ```
 Booking Cancelled
-       │
-       ▼
+       |
+       v
 seat_layout.status = 'available'
-       │
-       ▼
+       |
+       v
 Query: first 'waiting' entry for (event_id, category_id)
-       │
-  Found? ──→ No → seat stays 'available'
-       │
+       |
+  Found? ---> No -> seat stays 'available'
+       |
       Yes
-       │
-       ▼
+       |
+       v
 UPDATE waitlists SET status='offered', offer_token=random(32B),
        offer_expires_at = NOW() + 15min
 UPDATE seat_layout SET status='held'  (reserved for this customer)
@@ -322,19 +324,19 @@ If a customer accepts:
 
 ---
 
-## 🚢 Deployment (Render + Supabase + Upstash)
+## Deployment (Render + Supabase + Upstash)
 
 ### 1. Database — Supabase (free)
-1. Create project at [supabase.com](https://supabase.com)
-2. Copy the **Connection String** (PostgreSQL URI)
+1. Create project at supabase.com
+2. Copy the Connection String (PostgreSQL URI)
 3. Run migration: `DATABASE_URL=<supabase_url> npm run migrate`
 
 ### 2. Redis — Upstash (free)
-1. Create Redis database at [upstash.com](https://upstash.com)
-2. Copy the **Redis URL** (starts with `rediss://`)
+1. Create Redis database at upstash.com
+2. Copy the Redis URL (starts with `rediss://`)
 
 ### 3. Backend — Render (free)
-1. New Web Service → connect GitHub repo
+1. New Web Service -> connect GitHub repo
 2. Root: `backend/`, Build: `npm install`, Start: `node src/server.js`
 3. Add all environment variables from `.env.example`
 
@@ -344,7 +346,7 @@ If a customer accepts:
 
 ---
 
-## 🔒 Security
+## Security
 
 - Passwords hashed with bcrypt (10 rounds)
 - JWT tokens expire in 7 days
