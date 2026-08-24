@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Seat is Ready!</title>
+</head>
+<body style="margin:0;padding:0;background:#0f0f1a;font-family:Arial,Helvetica,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#0f0f1a;padding:32px 16px;">
+  <tr><td align="center">
+    <table width="600" cellpadding="0" cellspacing="0" style="background:#1a1a2e;border-radius:16px;overflow:hidden;max-width:600px;width:100%;">
+      <tr>
+        <td style="background:linear-gradient(135deg,#f59e0b,#ef4444);padding:32px;text-align:center;">
+          <div style="font-size:40px;margin-bottom:8px;">🔔</div>
+          <h1 style="color:#fff;margin:0;font-size:24px;">Your Seat is Ready!</h1>
+          <p style="color:rgba(255,255,255,0.85);margin:8px 0 0;font-size:14px;">You have a limited time to accept this offer</p>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:32px;">
+          <p style="color:#e2e8f0;font-size:16px;margin:0 0 16px;">Hello, <strong>{{customerName}}</strong>!</p>
+          <p style="color:#94a3b8;font-size:14px;margin:0 0 24px;">Great news — a seat in the <strong style="color:#fbbf24;">{{categoryName}}</strong> category just became available for the event you were waiting for!</p>
+
+          <div style="background:#0f0f1a;border:1px solid #f59e0b;border-radius:12px;padding:20px;margin-bottom:24px;">
+            <p style="color:#94a3b8;font-size:12px;margin:0 0 4px;text-transform:uppercase;letter-spacing:1px;">Event</p>
+            <p style="color:#e2e8f0;font-size:18px;font-weight:bold;margin:0 0 12px;">{{eventTitle}}</p>
+            <p style="color:#94a3b8;font-size:13px;margin:0;">📅 {{eventDate}} &nbsp;|&nbsp; 🕐 {{eventTime}}</p>
+            <p style="color:#94a3b8;font-size:13px;margin:4px 0 0;">📍 {{venueName}}</p>
+          </div>
+
+          <div style="background:#1e1b2e;border:2px solid #ef4444;border-radius:12px;padding:16px;text-align:center;margin-bottom:24px;">
+            <p style="color:#fca5a5;font-size:13px;margin:0 0 4px;">⏰ This offer expires in</p>
+            <p style="color:#ef4444;font-size:28px;font-weight:bold;margin:0;">{{ttlMinutes}} MINUTES</p>
+            <p style="color:#6b7280;font-size:11px;margin:4px 0 0;">After this, the seat will be offered to the next person in line</p>
+          </div>
+
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+              <td style="padding-right:8px;">
+                <a href="{{acceptUrl}}" style="display:block;background:linear-gradient(135deg,#6c63ff,#e040fb);color:#fff;text-decoration:none;text-align:center;padding:14px;border-radius:10px;font-weight:bold;font-size:15px;">✅ Accept Offer</a>
+              </td>
+              <td style="padding-left:8px;">
+                <a href="{{declineUrl}}" style="display:block;background:#1e293b;color:#94a3b8;text-decoration:none;text-align:center;padding:14px;border-radius:10px;font-size:14px;border:1px solid #334155;">Decline</a>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td style="background:#0f0f1a;padding:16px 32px;text-align:center;border-top:1px solid #1e293b;">
+          <p style="color:#475569;font-size:11px;margin:0;">© 2025 TicketHub &nbsp;|&nbsp; <a href="mailto:support@tickethub.com" style="color:#6c63ff;">support@tickethub.com</a></p>
+        </td>
+      </tr>
+    </table>
+  </td></tr>
+</table>
+</body>
+</html>

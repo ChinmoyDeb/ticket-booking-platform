@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking Confirmed — {{bookingReference}}</title>
+</head>
+<body style="margin:0;padding:0;background:#0f0f1a;font-family:Arial,Helvetica,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#0f0f1a;padding:32px 16px;">
+  <tr><td align="center">
+    <table width="600" cellpadding="0" cellspacing="0" style="background:#1a1a2e;border-radius:16px;overflow:hidden;max-width:600px;width:100%;">
+      <!-- Header -->
+      <tr>
+        <td style="background:linear-gradient(135deg,#6c63ff,#e040fb);padding:32px;text-align:center;">
+          <div style="font-size:32px;margin-bottom:8px;">🎫</div>
+          <h1 style="color:#fff;margin:0;font-size:24px;letter-spacing:1px;">BOOKING CONFIRMED</h1>
+          <p style="color:rgba(255,255,255,0.8);margin:8px 0 0;font-size:14px;">TicketHub</p>
+        </td>
+      </tr>
+      <!-- Greeting -->
+      <tr>
+        <td style="padding:32px 32px 0;">
+          <p style="color:#e2e8f0;font-size:16px;margin:0 0 8px;">Hello, <strong>{{customerName}}</strong>! 🎉</p>
+          <p style="color:#94a3b8;font-size:14px;margin:0;">Your booking is confirmed. Show the QR code below at the venue.</p>
+        </td>
+      </tr>
+      <!-- Reference box -->
+      <tr>
+        <td style="padding:24px 32px 0;">
+          <div style="background:#0f0f1a;border:1px solid #6c63ff;border-radius:12px;padding:16px;text-align:center;">
+            <p style="color:#94a3b8;font-size:12px;margin:0 0 4px;text-transform:uppercase;letter-spacing:1px;">Booking Reference</p>
+            <p style="color:#a78bfa;font-size:22px;font-weight:bold;margin:0;letter-spacing:2px;">{{bookingReference}}</p>
+          </div>
+        </td>
+      </tr>
+      <!-- Event details -->
+      <tr>
+        <td style="padding:24px 32px 0;">
+          <h2 style="color:#e2e8f0;font-size:18px;margin:0 0 16px;">Event Details</h2>
+          <table width="100%" cellpadding="8" cellspacing="0" style="border-collapse:collapse;">
+            <tr><td style="color:#94a3b8;font-size:13px;width:40%;">Event</td><td style="color:#e2e8f0;font-size:13px;font-weight:bold;">{{eventTitle}}</td></tr>
+            <tr><td style="color:#94a3b8;font-size:13px;">Date</td><td style="color:#e2e8f0;font-size:13px;">{{eventDate}}</td></tr>
+            <tr><td style="color:#94a3b8;font-size:13px;">Time</td><td style="color:#e2e8f0;font-size:13px;">{{eventTime}}</td></tr>
+            <tr><td style="color:#94a3b8;font-size:13px;">Venue</td><td style="color:#e2e8f0;font-size:13px;">{{venueName}}, {{venueCity}}</td></tr>
+            <tr><td style="color:#94a3b8;font-size:13px;">Seats</td><td style="color:#e2e8f0;font-size:13px;">{{seatList}}</td></tr>
+            <tr><td style="color:#94a3b8;font-size:13px;">Total Paid</td><td style="color:#a78bfa;font-size:15px;font-weight:bold;">{{totalAmount}}</td></tr>
+          </table>
+        </td>
+      </tr>
+      <!-- QR Code -->
+      <tr>
+        <td style="padding:24px 32px;text-align:center;">
+          <p style="color:#94a3b8;font-size:13px;margin:0 0 12px;">Your Entry QR Code</p>
+          <img src="cid:qrcode@tickethub" alt="QR Code" style="width:200px;height:200px;border:4px solid #6c63ff;border-radius:12px;" />
+          <p style="color:#64748b;font-size:11px;margin:8px 0 0;">Present this QR code at the venue entrance</p>
+        </td>
+      </tr>
+      <!-- Footer -->
+      <tr>
+        <td style="background:#0f0f1a;padding:24px 32px;text-align:center;border-top:1px solid #1e293b;">
+          <p style="color:#475569;font-size:12px;margin:0;">Questions? Contact us at <a href="mailto:support@tickethub.com" style="color:#6c63ff;">support@tickethub.com</a></p>
+          <p style="color:#334155;font-size:11px;margin:8px 0 0;">© 2025 TicketHub. All rights reserved.</p>
+        </td>
+      </tr>
+    </table>
+  </td></tr>
+</table>
+</body>
+</html>

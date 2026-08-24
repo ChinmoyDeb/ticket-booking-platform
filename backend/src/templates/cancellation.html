@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Booking Cancelled</title></head>
+<body style="margin:0;padding:0;background:#0f0f1a;font-family:Arial,Helvetica,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#0f0f1a;padding:32px 16px;">
+  <tr><td align="center">
+    <table width="600" cellpadding="0" cellspacing="0" style="background:#1a1a2e;border-radius:16px;overflow:hidden;max-width:600px;width:100%;">
+      <tr>
+        <td style="background:linear-gradient(135deg,#374151,#6b7280);padding:32px;text-align:center;">
+          <div style="font-size:40px;margin-bottom:8px;">❌</div>
+          <h1 style="color:#fff;margin:0;font-size:22px;">Booking Cancelled</h1>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:32px;">
+          <p style="color:#e2e8f0;font-size:15px;margin:0 0 16px;">Hi <strong>{{customerName}}</strong>,</p>
+          <p style="color:#94a3b8;font-size:14px;margin:0 0 24px;">Your booking <strong style="color:#a78bfa;">{{bookingReference}}</strong> for <strong>{{eventTitle}}</strong> on {{eventDate}} has been cancelled.</p>
+          <div style="background:#0f0f1a;border:1px solid #374151;border-radius:12px;padding:20px;margin-bottom:24px;">
+            <p style="color:#94a3b8;font-size:13px;margin:0 0 4px;">Refund Amount</p>
+            <p style="color:#34d399;font-size:22px;font-weight:bold;margin:0;">{{totalAmount}}</p>
+            <p style="color:#6b7280;font-size:12px;margin:8px 0 0;">Refunds are processed within 5–7 business days to your original payment method.</p>
+          </div>
+          <a href="{{frontendUrl}}" style="display:block;background:linear-gradient(135deg,#6c63ff,#e040fb);color:#fff;text-decoration:none;text-align:center;padding:14px;border-radius:10px;font-weight:bold;">Browse Other Events</a>
+        </td>
+      </tr>
+      <tr>
+        <td style="background:#0f0f1a;padding:16px 32px;text-align:center;border-top:1px solid #1e293b;">
+          <p style="color:#475569;font-size:11px;margin:0;">© 2025 TicketHub &nbsp;|&nbsp; <a href="mailto:support@tickethub.com" style="color:#6c63ff;">support@tickethub.com</a></p>
+        </td>
+      </tr>
+    </table>
+  </td></tr>
+</table>
+</body>
+</html>
